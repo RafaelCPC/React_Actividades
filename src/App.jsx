@@ -13,10 +13,24 @@ import UncontrolledLogin from './Components/UncontrolledLogin'
 import FocusableInput from './Components/FocusableInput'
 import Color from './Components/Color'
 import TodoList from './Components/TodoList'
+import { Container } from './Components/Container'
+import { LanguageContext } from './Components/LanguageContext'
+import {GithubUser} from "./Components/GithubUser"
+import { GithubUsers } from './Components/GithubUsers'
+import { UseCounter } from './Components/UseCounter'
+import { FormHook } from './Components/FormHook'
+import { UseGituser } from './Components/UseGituser'
+
+
 
 function App() {
   const [date, setDate] = useState (new Date ())
   const [login, setLogin] = useState(false)
+  const [language, setLenguage] = useState("en")    
+    function handleLenguage(language) {
+        setLenguage(language)
+    }
+  
   function handleButton () {
       setDate(new Date())
       return alert(date.toLocaleTimeString());
@@ -64,8 +78,12 @@ function App() {
       <Counter initialValue={0} incremento ={2} decremento ={1} />
         {/* Debería ser una función y no un valor directo, porque entonces no iría
         incrementando el valor sino que mantendría el valor directo  */}
-      <h2>useEffect 2</h2>
-      <Clock />
+      <h2>useEffect 2 & Context </h2>
+      <LanguageContext.Provider value={language}>
+      <button onClick={() =>handleLenguage("es")}>ES</button>
+      <button onClick={() =>handleLenguage("en")}>EN</button>
+        <Clock />
+      </LanguageContext.Provider>
       <h2>Handling Events 1 & 2</h2>
       <MouseClicker />
         {/* puedes prevenir que salga el nombre especificando el valor que te interesa que salga
@@ -83,6 +101,18 @@ function App() {
       <Color color={color} />
       <h2> List and State </h2>
       <TodoList/>
+      <h2> Component Composition </h2>
+      <Container title="Welcome">
+      </Container>
+      <h2>Data Fetching 1</h2>
+      <GithubUser user="RafaelCPC"/>
+      <GithubUsers />
+      <h2> Custom hook 1</h2>
+      <UseCounter />
+      <h2> Custom hook 2</h2>
+      <FormHook />
+      <h2> Custom hook 3</h2>
+      <UseGituser user="RafaelCPC"/>
     </div>
   )
 }
