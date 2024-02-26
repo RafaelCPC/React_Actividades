@@ -20,6 +20,9 @@ import { GithubUsers } from './Components/GithubUsers'
 import { UseCounter } from './Components/UseCounter'
 import { FormHook } from './Components/FormHook'
 import { UseGituser } from './Components/UseGituser'
+import { Link, Route, Routes } from 'react-router-dom'
+import { GithubUserList } from './Components/GithubUserList'
+import { ShowGithubUser } from './Components/ShowGithubUser'
 
 
 
@@ -111,8 +114,43 @@ function App() {
       <UseCounter />
       <h2> Custom hook 2</h2>
       <FormHook />
-      <h2> Custom hook 3</h2>
+      <h2> Custom hook 3 & SWR 1</h2>
       <UseGituser user="RafaelCPC"/>
+      <h2> React Router 4</h2>
+      <Link to="/"> Welcome </Link> | <Link to="counter">Counter</Link> | <Link to="users"> Usuarios </Link> | <Link to="userlist"> User List</Link>
+      <Routes>
+          <Route path='/' element={<div>
+          <h2>React Router 1</h2>
+          <Welcome name="Jorge" />
+          </div>
+          }></Route>
+          <Route path='counter' element={<div>
+            <h2>React Router 2</h2>
+            <Counter initialValue={0} incremento ={2} decremento ={1} />
+          </div>} />
+          <Route path="users" element={
+          <div>
+            <h2> React Router 3 </h2>
+            <GithubUsers />
+          </div>
+          }>
+                <Route path=":id" />
+            </Route>
+            <Route path="*" element={<div>
+                <h2> React Router 5</h2>
+                <p>Not Found</p>
+                <Link to="/">Go Home</Link> 
+                </div>} />
+              <Route path="userlist" element={
+                  <div>
+                  <h2> React Router 6 & 7 </h2>
+                  <GithubUserList />
+                  </div>
+                  }>
+                  <Route index element={<p>Add an user and select it</p>} />
+                <Route path=":username" element={<ShowGithubUser />  } />
+            </Route>
+      </Routes>
     </div>
   )
 }

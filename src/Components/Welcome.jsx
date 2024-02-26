@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Age from "./Age";
 import AlertClock from "./AlertClock";
 function AdultAge ({aged}){
@@ -17,6 +18,7 @@ function AdultAge ({aged}){
 export function Welcome ({name,age}) {
     return (
     <div className="welcome">
+        
         <p> Welcome, {name}! </p>
         <p> Your age is {age} </p>
         <h2> Props 3</h2>
